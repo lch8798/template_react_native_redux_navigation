@@ -1,2 +1,15 @@
-# framework_react_native_redux_navigation
-Frame: React Native, Redux, Navigation
+# Framework
+> React Native
+- react-native
+
+> Redux
+- ducks pattern
+
+> Navigation
+- react-navigation
+
+> UI Kit
+- react-native-elements
+- react-native-vector-icons
+
+##### The last update is 2020-01-30.
