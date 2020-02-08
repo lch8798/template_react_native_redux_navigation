@@ -3,14 +3,15 @@ import { SafeAreaView, View, Text } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { setWorking } from './../../redux/app';
-import { ThemeProvider, Input, Button } from 'react-native-elements';
+import { ThemeProvider, Input, Button, Overlay } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputNickname: ''
+      inputNickname: '',
+      visibleModal: false
     }
     this.inputNickname = React.createRef();
   }
@@ -48,7 +49,16 @@ class HomeScreen extends Component {
     this.props.navigation.navigate('AgreementScreen');
   }
 
+  handleVisibleModal = () => {
+    this.setState({ visibleModal: true });
+  }
+  
+  handleDisableModal = () => {
+    this.setState({ visibleModal: false });
+  }
+
   render = () => {
+    const { visibleModal } = this.state;
     const { working } = this.props;
     const theme = {
       Button: {
@@ -97,8 +107,26 @@ class HomeScreen extends Component {
           }}>
             <Button title={'Open Stack Screen'} onPress={this.openAgreementScreen} />
           </View>
-        </SafeAreaView>
 
+          <View style={{
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+          }}>
+            <Button title={'Open Modal Popup'} onPress={this.handleVisibleModal} />
+          </View>
+
+          <Overlay
+            isVisible={visibleModal}
+            windowBackgroundColor={'rgba(0, 0, 0, .5)'}
+            overlayBackgroundColor={'#fff'}
+            width={'auto'}
+            height={'auto'}
+            onBackdropPress={this.handleDisableModal}
+          >
+            <Text>Hello from Overlay!</Text>
+          </Overlay>
+
+        </SafeAreaView>
       </ThemeProvider>
     );
   };
