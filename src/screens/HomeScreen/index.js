@@ -3,7 +3,7 @@ import { SafeAreaView, View, Text } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { setWorking } from './../../redux/app';
-import { Input, Button } from 'react-native-elements';
+import { ThemeProvider, Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class HomeScreen extends Component {
@@ -50,7 +50,16 @@ class HomeScreen extends Component {
 
   render = () => {
     const { working } = this.props;
+    const theme = {
+      Button: {
+        type: 'outline',
+        buttonStyle: {
+          backgroundColor: '#fff'
+        }
+      },
+    };
     return (
+      <ThemeProvider theme={theme}>
         <SafeAreaView style={{ flex: 1, justifyContent: 'space-evenly' }}>
           <Text style={{ textAlign: 'center' }}>{working ? 'Working...' : 'Not Working'}</Text>
           <Button title={'Toggle Working test redux'} onPress={this.toggleWorking} />
@@ -88,7 +97,9 @@ class HomeScreen extends Component {
           }}>
             <Button title={'Open Stack Screen'} onPress={this.openAgreementScreen} />
           </View>
-      </SafeAreaView>
+        </SafeAreaView>
+
+      </ThemeProvider>
     );
   };
 }
