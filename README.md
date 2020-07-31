@@ -1,4 +1,5 @@
-# Framework
+# Configuration
+
 > React Native
 - react-native
 
